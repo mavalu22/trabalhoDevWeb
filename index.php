@@ -24,6 +24,10 @@ switch ($action) {
         }
         break;
 
+    case 'home':
+        $controller->home();
+        break;
+
     case 'logout':
         $controller->logout();
         break;

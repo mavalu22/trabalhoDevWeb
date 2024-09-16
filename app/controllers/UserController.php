@@ -18,8 +18,11 @@ class UserController
     
     public function showLogin()
     {
-        require __DIR__ . '/../views/user/login.php';
-    }
+        if (isset($_SESSION['user_id'])) {
+            header('Location: index.php?action=home');
+            exit();
+        }
+        require __DIR__ . '/../views/user/login.php';    }
     
     public function showRegister()
     {
@@ -36,6 +39,7 @@ class UserController
     
             if ($user && password_verify($password, $user['password'])) {
                 $_SESSION['user_id'] = $user['id'];
+                $_SESSION['username'] = $user["username"];
                 header('Location: index.php');
                 exit();
             } else {
@@ -52,12 +56,28 @@ class UserController
         $password = $_POST['password'] ?? '';
     
         if ($username && $email && $password) {
-            if ($this->userModel->create($username, $email, $password)) {
-                header('Location: index.php?action=login');
+            $userUN = $this->userModel->findByUsernameOrEmail($username);
+            $userEM = $this->userModel->findByUsernameOrEmail($email);
+
+            if (!($userUN || $userEM)){
+                if ($this->userModel->create($username, $email, $password)) {
+                    header('Location: index.php?action=login');
+                    exit();
+                }
+            }else{
+                header('Location: index.php?action=register&error=1');
                 exit();
-            } else {
             }
         }
+    }
+
+    public function home()
+    {
+        if (!isset($_SESSION['user_id'])) {
+            header('Location: /public/index.php?action=login');
+            exit();
+        }
+        require __DIR__ . '/../views/user/home.php';
     }
     
     public function logout()

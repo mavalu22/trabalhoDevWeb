@@ -1,3 +1,4 @@
+/* Reset básico de margens e preenchimentos */
 body,
 h1,
 label,
@@ -8,16 +9,95 @@ button {
     box-sizing: border-box;
 }
 
+/* Estilos gerais do corpo */
 body {
     font-family: 'Arial', sans-serif;
     background-color: #f0f2f5;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    flex-direction: column;
+    min-height: 100vh;
     margin: 0;
 }
 
+/* Estilos do cabeçalho */
+header {
+    background-color: #007bff;
+    color: #fff;
+    padding: 15px 0;
+    width: 100%;
+    position: fixed;
+    /* Fixa o cabeçalho no topo */
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.site-logo {
+    height: 50px;
+    width: auto;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+nav ul li {
+    margin-left: 20px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+nav ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Estilo do username no header */
+.username {
+    color: #fff;
+    font-size: 16px;
+    margin-right: 20px;
+    /* Espaço entre o username e o botão de logout */
+}
+
+/* Estilo do botão de logout no cabeçalho */
+.button-logout {
+    background-color: #d9534f;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.button-logout:hover {
+    background-color: #c9302c;
+}
+
+/* Container centralizado */
 .container {
     background: #ffffff;
     padding: 30px;
@@ -25,15 +105,19 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     width: 100%;
     max-width: 400px;
+    margin: 200px auto;
+    /* Adiciona um espaçamento para que o conteúdo não fique coberto pelo cabeçalho */
     text-align: center;
 }
 
+/* Estilos dos títulos */
 h1 {
     margin-bottom: 20px;
     color: #333;
     font-size: 24px;
 }
 
+/* Estilos dos labels */
 label {
     display: block;
     margin-bottom: 8px;
@@ -41,6 +125,7 @@ label {
     font-size: 14px;
 }
 
+/* Estilos dos inputs e botões */
 input[type="text"],
 input[type="email"],
 input[type="password"],
@@ -53,6 +138,7 @@ button {
     font-size: 16px;
 }
 
+/* Estilo dos botões */
 button {
     background-color: #007bff;
     color: #fff;
@@ -67,12 +153,14 @@ button:hover {
     background-color: #0056b3;
 }
 
+/* Mensagem de erro */
 .error-message {
     color: #d9534f;
     margin-bottom: 15px;
     font-size: 14px;
 }
 
+/* Link */
 a {
     color: #007bff;
     text-decoration: none;
@@ -82,4 +170,20 @@ a {
 
 a:hover {
     text-decoration: underline;
+}
+
+/* Estilos do rodapé */
+footer {
+    background-color: #f1f1f1;
+    color: #333;
+    padding: 10px 0;
+    text-align: center;
+    margin-top: auto;
+    /* Faz o rodapé permanecer no final */
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
 }
