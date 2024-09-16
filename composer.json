@@ -1,0 +1,17 @@
+{
+    "name": "mathe/trabalho-dev-web",
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    },
+    "authors": [
+        {
+            "name": "mavalu22",
+            "email": "matheusnardi@gmail.com"
+        }
+    ],
+    "require": {
+        "doctrine/dbal": "^4.1"
+    }
+}
