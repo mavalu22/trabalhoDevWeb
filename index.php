@@ -3,9 +3,11 @@
 require_once __DIR__ . '/vendor/autoload.php';
 
 use App\Controllers\UserController;
+use App\Controllers\MessageController;
 
 $action = $_GET['action'] ?? 'showLogin';
 $controller = new UserController();
+$messageController = new MessageController();
 
 switch ($action) {
     case 'login':
@@ -24,13 +26,33 @@ switch ($action) {
         }
         break;
 
+    case 'sendMessage':
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $messageController->sendMessage();
+        } else {
+            $messageController->showSendMessage();
+        }
+        break;
+
+    case 'deleteMessage':
+        $messageController->deleteMessage();
+        break;
+    
+    case 'searchRecipient':
+        $messageController->searchRecipient();
+        break;
+
     case 'home':
-        $controller->home();
+        $messageController->showHome();
         break;
 
     case 'logout':
         $controller->logout();
         break;
+    
+    case 'viewMessage':
+        $messageController->viewMessage();
+        break;        
 
     default:
         $controller->showLogin();

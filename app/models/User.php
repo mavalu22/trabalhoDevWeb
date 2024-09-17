@@ -23,6 +23,14 @@ class User
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
+    public function searchUsersByName($query)
+    {
+        $sql = "SELECT username FROM users WHERE username LIKE :query LIMIT 10";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute(['query' => "%$query%"]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public function create($username, $email, $password)
     {
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);

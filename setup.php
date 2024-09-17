@@ -16,6 +16,26 @@ try {
     )";
     $conn->exec($createUsersTableSQL);
 
+    $createMessagesTableSQL = "CREATE TABLE IF NOT EXISTS messages (
+        id INTEGER PRIMARY KEY AUTOINCREMENT ,
+        user_id INTEGER NOT NULL,
+        subject TEXT NOT NULL,
+        message TEXT NOT NULL,
+        send_datetime DATETIME DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (user_id) REFERENCES users(id)
+    )";
+    $conn->exec($createMessagesTableSQL);
+
+    $createMessageUserTableSQL = "CREATE TABLE IF NOT EXISTS message_user (
+        message_id INTEGER NOT NULL,
+        user_id INTEGER NOT NULL,
+        read_status INTEGER DEFAULT 0,
+        PRIMARY KEY (message_id, user_id),
+        FOREIGN KEY (message_id) REFERENCES messages(id) ON DELETE CASCADE,
+        FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+    )";
+    $conn->exec($createMessageUserTableSQL);
+
     echo "Tabelas criadas com sucesso!";
 
 } catch (PDOException $e) {
