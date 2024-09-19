@@ -701,17 +701,31 @@ body.dark-mode input[type="date"]::-webkit-calendar-picker-indicator {
 
 .filter-container input[type="text"],
 .filter-container input[type="date"] {
-    width: 200px;
+    width: 150px;
 }
 
-/* Estilo para erro em dark mode */
 body.dark-mode .filter-container .error-message {
     color: #ff4d4d;
 }
 
-/* Estilo do erro */
 .filter-container .error-message {
     color: red;
     margin-top: 5px;
     font-size: 14px;
+}
+
+.button-clear-filters {
+    background-color: #dc3545;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.button-clear-filters:hover {
+    background-color: #c82333;
 }

@@ -3,32 +3,22 @@ document.addEventListener("DOMContentLoaded", function () {
     const filterSubjectInput = document.getElementById('filter-subject');
     const filterStartDateInput = document.getElementById('filter-start-date');
     const filterEndDateInput = document.getElementById('filter-end-date');
-    const errorContainer = document.createElement('div');
-    errorContainer.style.color = 'red';
-    filterEndDateInput.parentElement.appendChild(errorContainer);
+    const clearFiltersButton = document.getElementById('clear-filters');
 
-    function validateDateRange() {
-        const startDate = filterStartDateInput.value;
-        const endDate = filterEndDateInput.value;
-
-        if (startDate && endDate && new Date(startDate) > new Date(endDate)) {
-            errorContainer.textContent = "End date must be later than or equal to the start date.";
-            return false;
-        } else {
-            errorContainer.textContent = "";
-            return true;
-        }
+    function extractDateOnly(dateString) {
+        if (!dateString) return null;
+        const [datePart] = dateString.split(' ');
+        return datePart;
     }
 
     function filterMessages() {
-        if (!validateDateRange()) {
-            return;
-        }
-
         const fromFilter = filterFromInput.value.toLowerCase();
         const subjectFilter = filterSubjectInput.value.toLowerCase();
         const startDateFilter = filterStartDateInput.value;
         const endDateFilter = filterEndDateInput.value;
+
+        const startDate = startDateFilter ? new Date(startDateFilter).toISOString().split('T')[0] : null;
+        const endDate = endDateFilter ? new Date(endDateFilter).toISOString().split('T')[0] : null;
 
         const messageRows = document.querySelectorAll('.inbox-row');
 
@@ -37,12 +27,10 @@ document.addEventListener("DOMContentLoaded", function () {
             const subjectText = messageRow.querySelector('.subject').textContent.toLowerCase();
             const messageDate = messageRow.querySelector('.date').textContent.trim();
 
-            const messageDateObj = new Date(messageDate);
-            const startDateObj = startDateFilter ? new Date(startDateFilter) : null;
-            const endDateObj = endDateFilter ? new Date(endDateFilter) : null;
+            const messageDateOnly = extractDateOnly(messageDate);
 
-            const isDateInRange = (!startDateObj || messageDateObj >= startDateObj) &&
-                (!endDateObj || messageDateObj <= endDateObj);
+            const isDateInRange = (!startDate || messageDateOnly >= startDate) &&
+                (!endDate || messageDateOnly <= endDate);
 
             const actionColumn = messageRow.nextElementSibling;
 
@@ -61,6 +49,15 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
     }
+
+    clearFiltersButton.addEventListener('click', function () {
+        filterFromInput.value = '';
+        filterSubjectInput.value = '';
+        filterStartDateInput.value = '';
+        filterEndDateInput.value = '';
+
+        filterMessages();
+    });
 
     filterFromInput.addEventListener('input', filterMessages);
     filterSubjectInput.addEventListener('input', filterMessages);

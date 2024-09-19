@@ -14,6 +14,7 @@
         <input type="date" id="filter-start-date" placeholder="Start Date">
         <label >To</label>
         <input type="date" id="filter-end-date" placeholder="End Date">
+        <button id="clear-filters" class="button-clear-filters">Clear Filters</button>
     </div>
 
     <h1>Inbox</h1>
