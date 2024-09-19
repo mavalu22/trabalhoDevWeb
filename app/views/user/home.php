@@ -1,12 +1,25 @@
 <?php $title = 'Home'; ?>
 <?php include __DIR__ . '/../header.php'; ?>
-
+<script src="/public/js/filter.js"></script>
 <div class="container2">
-    <h1>Inbox</h1>
 
+
+    <h1>Filters</h1>
+    <div class="filter-container">
+        <label >Sender</label>
+        <input type="text" id="filter-from" placeholder="Filter by Sender">
+        <label >Subject</label>
+        <input type="text" id="filter-subject" placeholder="Filter by Subject">
+        <label >From</label>
+        <input type="date" id="filter-start-date" placeholder="Start Date">
+        <label >To</label>
+        <input type="date" id="filter-end-date" placeholder="End Date">
+    </div>
+
+    <h1>Inbox</h1>
     <div class="inbox-grid">
         <div class="inbox-header">
-            <div class="inbox-header-item">From</div>
+            <div class="inbox-header-item">Sender</div>
             <div class="inbox-header-item">Subject</div>
             <div class="inbox-header-item">Date</div>
             <div class="inbox-header-item">Status</div>
@@ -38,6 +51,5 @@
                 </div>
         <?php endforeach; ?>
     </div>
-
 </div>
 <?php include __DIR__ . '/../footer.php'; ?>
